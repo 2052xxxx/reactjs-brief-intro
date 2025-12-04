@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import HelloWorld from './components/HelloWorld';
+import { MyComponent, AnotherComponent } from './components/Components';
+
 
 function App() {
+  const message = <h2>Je le sens c'est lui l'homme de ma vie</h2>
+  
+  const [likes, setLikes] = useState(0);
+
+  const getLikes = () => {
+    return likes + 1
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>Hello World</h1>
+      <HelloWorld />
+      <MyComponent />
+      <AnotherComponent />
+      {message}
+
+      <button onClick={
+        () => setLikes(getLikes)
+      }>{likes}</button>
+
+    </>
   );
 }
 
