@@ -1,20 +1,21 @@
 import Navbar from './components/Navbar';
 import Home from './components/Home';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Create from './components/Create';
 
 function App() {
-  // const [likes, setLikes] = useState(0);
-
-  // const getLikes = () => {
-  //   return likes + 1
-  // }
-
   return (
-    <div className='App'>
-      <Navbar />
-      <div className="content">
-        <Home />
+    <Router>
+      <div className='App'>
+        <Navbar />
+        <div className="content">
+          <Routes >
+            <Route path='/' element={<Home />} />
+            <Route path='/create' element={<Create />} />
+          </Routes >
+        </div>
       </div>
-    </div>
+    </Router>
   );
 }
 
