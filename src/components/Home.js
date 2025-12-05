@@ -1,38 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import BlogList from './BlogList';
+import useFetch from './useFetch';
 
 const Home = () => {
     const message = "Je le sens c'est lui l'homme de ma vie";
+    const url = "http://localhost:8000/blogs";
 
     const [name, setName] = useState('Will Graham');
     const [age, setAge] = useState(40);
-
-    const [blogs, setBlogs] = useState([]);
 
     const handleClick = () => {
         setName((prev) => (prev === "Will Graham" ? "Hannibal Lecter" : "Will Graham"))
         setAge((prev) => (prev === 40 ? 50 : 40))
     }
 
-    // useEffect(() => {
-    //     async function fetchBlogs() {
-    //         let response = await fetch("http://localhost:8000/blogs");
-    //         response = await response.json();
-    //         setBlogs(response);
-    //     }
-
-    //     fetchBlogs();
-    // }, [])
-
-    useEffect(() => {
-        fetch('http://localhost:8000/blogs')
-            .then(res => {
-                return res.json();
-            })
-            .then(data => {
-                setBlogs(data);
-            })
-    }, [])
+    const { data, isPending, error} = useFetch(url);
 
     return (
         <div className="home">
@@ -40,8 +22,9 @@ const Home = () => {
             <p>{name} is {age} years old</p>
             <button onClick={handleClick}>Click Me!</button>
             <br />
-
-            {blogs && <BlogList blogs={blogs} />}
+            { error && <div> {error} </div>}
+            { isPending ? <div>Loading...</div> : (data && <BlogList blogs={data} />)}
+            {/* {blogs && <BlogList blogs={blogs} />} */}
             {/* <BlogList blogs={blogs.filter((blog) => blog.author === "mario")} title="Mario's Blogs"/> */}
         </div>
     );
