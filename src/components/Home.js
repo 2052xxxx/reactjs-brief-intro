@@ -23,7 +23,7 @@ const Home = () => {
             <button onClick={handleClick}>Click Me!</button>
             <br />
             { error && <div> {error} </div>}
-            { isPending ? <div>Loading...</div> : (data && <BlogList blogs={data} />)}
+            { isPending ? <div>Loading...</div> : (data && <BlogList blogs={data} title = "All Blogs"/>)}
             {/* {blogs && <BlogList blogs={blogs} />} */}
             {/* <BlogList blogs={blogs.filter((blog) => blog.author === "mario")} title="Mario's Blogs"/> */}
         </div>
